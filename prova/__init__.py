@@ -32,7 +32,7 @@ class Pose(TPose):
 
 class ControlIda(deque):
 
-    def __init__(self, csv_file="pontos.csv"):
+    def __init__(self, csv_file="./utils/pontos.csv"):
         super().__init__()
         with open(csv_file) as csv_file_var:
             csv_reader = csv.reader(csv_file_var, delimiter=",")
@@ -105,7 +105,7 @@ class TurtleController(Node):
         
     def update_setpoint(self):
         try:
-            self.control_volta.enqueue(self.control_ida[0])
+            self.control_volta.push(self.control_ida[0])
             self.setpoint = self.pose + self.control_ida.dequeue()
             self.get_logger().info(f"Tartaruga chegou em {self.pose}, andando para {self.setpoint}")
         except IndexError:
