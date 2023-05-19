@@ -35,7 +35,7 @@ class ControlIda(deque):
     def __init__(self, csv_file="./utils/pontos.csv"):
         super().__init__()
         with open(csv_file) as csv_file_var:
-            csv_reader = csv.reader(csv_file_var, delimiter=",")
+            csv_reader = csv.reader(csv_file_var, delimiter=',')
             for row in csv_reader:
                 pose = Pose()
                 pose.x, pose.y = [float(x) for x in row]
@@ -126,7 +126,7 @@ class TurtleController(Node):
 def main(args=None):
     rclpy.init(args=args)
     ci = ControlIda()
-    cv = ControlVolta
+    cv = ControlVolta()
     tc = TurtleController(ci, cv)
     rclpy.spin(tc)
     tc.destroy_node()
